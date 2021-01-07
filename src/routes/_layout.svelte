@@ -5,5 +5,4 @@
 
 <Nav {segment}/>
 
-layout
 <slot></slot>
