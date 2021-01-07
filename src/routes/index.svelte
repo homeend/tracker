@@ -1,12 +1,7 @@
 <script>
-	// import successkid from 'images/successkid.jpg';
+    import CovidStat from '../components/CovidStat.svelte';
+    import TableContainer from '../components/TableContainer.svelte';
 </script>
 
-<style>
-</style>
-
-<svelte:head>
-	<title>Main page</title>
-</svelte:head>
-
-index
+<CovidStat />
+<TableContainer />
