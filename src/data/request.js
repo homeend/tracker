@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import parser from './parser';
 
 
@@ -10,9 +11,9 @@ export default async function usStats(){
         return parser.parseUsStats(resp.data);
     }
     catch(e){
-        console.log(e);
+        // console.log(e);
         const err_txt = 'temporarily unavailable';
-        return {
+        const result = {
             cases: err_txt,
             death: err_txt,
             recovered: err_txt,
@@ -21,6 +22,7 @@ export default async function usStats(){
             icu: err_txt,
             tested: err_txt,
             updated: moment().format('LLLL'),
-        };    
+        }
+        return result;
     }
 }   
