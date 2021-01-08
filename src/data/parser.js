@@ -28,6 +28,101 @@ function parseStateStats(data, stateShortName){
     return preProcessData(tmp);      
 }
 
+function parseChart(data, key, label, color){
+    const chartData = data.map( data_point => {
+        return {
+            x: moment(data_point.date, "YYYYMMDD"),
+            y: data_point[key]
+        }
+    });
+
+    return {
+        label,
+        data: chartData,
+        fill: false,
+        borderColor: color  
+    }
+}
+
+function parseHistoricStats(data){
+    // [
+    //     {
+    //     date: 20210107,
+    //     states: 56,
+    //     positive: 21340773,
+    //     negative: 201442513,
+    //     pending: 11612,
+    //     hospitalizedCurrently: 132370,
+    //     hospitalizedCumulative: 716151,
+    //     inIcuCurrently: 23821,
+    //     inIcuCumulative: 38236,
+    //     onVentilatorCurrently: 7900,
+    //     onVentilatorCumulative: 3748,
+    //     dateChecked: "2021-01-07T24:00:00Z",
+    //     death: 356229,
+    //     hospitalized: 716151,
+    //     totalTestResults: 262041062,
+    //     lastModified: "2021-01-07T24:00:00Z",
+    //     recovered: null,
+    //     total: 0,
+    //     posNeg: 0,
+    //     deathIncrease: 4033,
+    //     hospitalizedIncrease: 5318,
+    //     negativeIncrease: 1217934,
+    //     positiveIncrease: 266197,
+    //     totalTestResultsIncrease: 1914839,
+    //     hash: "28a62b13edef450b38fce15b12aab87c7cf98f19"
+    //     },
+    //     {
+    //     date: 20210106,
+
+    return [
+        {
+            label: 'Cases',
+            key: 'positive',
+            color: 'rgb(100, 0, 200)',
+        },
+        {
+            label: 'Recovered',
+            key: 'recovered',
+            color: 'rgb(100, 100, 200)',
+        },
+        {
+            label: 'Total Tested',
+            key: 'totalTestResults',
+            color: 'rgb(10, 30, 100)',
+        },
+        {
+            label: 'Hospitalized',
+            key: 'hospitalizedCurrently',
+            color: 'rgb(20, 100, 230)',
+        },
+        {
+            label: 'Deaths',
+            key: 'death',
+            color: 'rgb(255, 99, 132)',
+        },
+    ].reduce((prev, next) => {
+        if(data.filter(d => d[next.key] !== null).length > 4){
+            prev.push(parseChart(data, next.key, next.label, next.color));
+        }
+        return prev;
+    }, []);
+
+    const state_data = data.find(state => state.state === stateShortName);
+    const tmp = {
+        cases: state_data.positive,
+        death: state_data.death,
+        recovered: state_data.recovered,
+        ventilator: state_data.onVentilatorCurrently,
+        hospitalized: state_data.hospitalized,
+        icu: state_data.inIcuCurrently,
+        tested: state_data.totalTestResults,
+        updated: moment(state_data.dateModified).format('LLLL'),
+    }
+    return preProcessData(tmp);      
+}
+
 function parseUsStats(data){
     // first element of array
     const [stats] = data; 
