@@ -13,6 +13,20 @@ export const ERROR_RESULT = {
     updated: moment().format('LLLL'),
 }
 
+function parseStateStats(data, stateShortName){
+    const state_data = data.find(state => state.state === stateShortName);
+    const tmp = {
+        cases: state_data.positive,
+        death: state_data.death,
+        recovered: state_data.recovered,
+        ventilator: state_data.onVentilatorCurrently,
+        hospitalized: state_data.hospitalized,
+        icu: state_data.inIcuCurrently,
+        tested: state_data.totalTestResults,
+        updated: moment(state_data.dateModified).format('LLLL'),
+    }
+    return preProcessData(tmp);      
+}
 
 function parseUsStats(data){
     // first element of array
@@ -28,8 +42,12 @@ function parseUsStats(data){
         updated: moment(stats.lastModified).format('LLLL'),
     }
 
+    return preProcessData(tmp);      
+}
+
+function preProcessData(stats_data){
     const result = {};
-    for (const [key, value] of Object.entries(tmp)) {
+    for (const [key, value] of Object.entries(stats_data)) {
         result[key] = formatNumber(value);
     }
     
@@ -72,4 +90,4 @@ function formatNumber(number){
 //     }
 // ]
 
-export default { parseUsStats }
+export default { parseUsStats, parseStateStats }

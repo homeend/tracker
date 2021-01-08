@@ -1,6 +1,6 @@
 <script context="module">
-    import {ERROR_RESULT} from '../data/parser.js';
     import stateNames from '../data/stateNames.js';
+    import {stateStats} from '../data/request.js';
 
     export async function preload(page){
         const stateName = page.params['state']
@@ -13,13 +13,14 @@
             this.error(404, 'State not found');
             return;
         }
-        else
+        else{
             return {
                 stateShort: stateName,
-                stateFullName: stateData.name
+                stateFullName: stateData.name,
+                stats: await stateStats(stateName)
             }
+        }
     }
-    let stats = ERROR_RESULT;
 </script>
 
 <script>
@@ -28,6 +29,7 @@
     import CovidChart from '../components/CovidChart.svelte';
     export let stateShort;
     export let stateFullName;
+    export let stats;
 </script>
 
 <svelte:head>
