@@ -1,5 +1,5 @@
 <script context="module">
-    import {ERROR_RESULT} from '../data/error.js';
+    import {ERROR_RESULT} from '../data/parser.js';
 
     export async function preload(page){
         return {

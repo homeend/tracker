@@ -1,6 +1,6 @@
 import axios from 'axios';
 import parser from './parser.js';
-import {ERROR_RESULT} from './error.js';
+import {ERROR_RESULT} from './parser.js';
 
 
 const DATA_ENDPOINT = 'https://api.covidtracking.com/v1/us/current.json';

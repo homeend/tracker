@@ -1,5 +1,19 @@
 import moment from 'moment';
 
+const ERR_TXT = 'temporarily unavailable';
+
+export const ERROR_RESULT = {
+    cases: ERR_TXT,
+    death: ERR_TXT,
+    recovered: ERR_TXT,
+    ventilator: ERR_TXT,
+    hospitalized: ERR_TXT,
+    icu: ERR_TXT,
+    tested: ERR_TXT,
+    updated: moment().format('LLLL'),
+}
+
+
 function parseUsStats(data){
     // first element of array
     const [stats] = data; 
