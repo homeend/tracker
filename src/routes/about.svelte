@@ -1,9 +1,9 @@
 <script>
-    import {APP_NAME} from './common.svelte'
+    import common_data from '../common/data.js';
 </script>
 
 <svelte:head>
-    <title>About {APP_NAME}</title>
+    <title>About {common_data.APP_NAME}</title>
 </svelte:head>
 
 <div class="section header">
