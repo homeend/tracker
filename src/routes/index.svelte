@@ -2,7 +2,7 @@
     import usStats from '../data/request.js';
     export async function preload(){
 		const usStatsData = await usStats();
-		return {usStats: usStatsData};
+		return {stats: usStatsData};
     }
 </script>
 
@@ -11,14 +11,13 @@
     import CovidStat from '../components/CovidStat.svelte';
     import CovidChart from '../components/CovidChart.svelte';
     import TableContainer from '../components/TableContainer.svelte';
-	export let usStats;
-	console.log(usStats);
+	export let stats;
 </script>
 
 <svelte:head>
     <title>{APP_NAME}</title>
 </svelte:head>
 
-<CovidStat />
+<CovidStat {stats}/>
 <CovidChart />
 <TableContainer />
