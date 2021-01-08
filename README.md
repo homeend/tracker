@@ -1,6 +1,7 @@
 # data source
 
-[covidtracking](https://api.covidtracking.com/v1/us/current.json)
+[covidtracking - us](https://api.covidtracking.com/v1/us/current.json)
+[covidtracking - us - states](https://api.covidtracking.com/v1/states/current.json)
 
 # sapper-template
 

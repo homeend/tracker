@@ -2,7 +2,7 @@
 	export let status;
 	export let error;
 	const dev = process.env.NODE_ENV === 'development';
-	console.log('error_page', error, 'is_dev', dev);
+	console.error('error_page', error, 'is_dev', dev);
 </script>
 
 <style>
