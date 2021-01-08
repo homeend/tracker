@@ -7,12 +7,15 @@
 </script>
 
 <script>
+    import {APP_NAME} from './common.svelte'
     import CovidStat from '../components/CovidStat.svelte';
     import CovidChart from '../components/CovidChart.svelte';
     export let state;
 </script>
 
-<h1>{state}</h1>
+<svelte:head>
+    <title>{state} - {APP_NAME}</title>
+</svelte:head>
 
 <CovidStat />
 <CovidChart />
