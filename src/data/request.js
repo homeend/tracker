@@ -23,7 +23,6 @@ String.prototype.formatUnicorn = String.prototype.formatUnicorn || function () {
 const DATA_ENDPOINT = 'https://api.covidtracking.com/v1/us/current.json';
 const DATA_ENDPOINT_STATE = 'https://api.covidtracking.com/v1/states/current.json';
 const DATA_ENDPOINT_DAILY = 'https://api.covidtracking.com/v1/us/daily.json';
-// const DATA_ENDPOINT_DAILY = 'http://localhost:6688/daily.json';
 const DATA_ENDPOINT_DAILY_STATE = 'https://api.covidtracking.com/v1/states/{0}/daily.json';
 
 export default async function usStats(){
@@ -49,7 +48,7 @@ export async function stateStats(stateShortName){
 export async function allStateStats(){
     try{
         const resp = await axios.get(DATA_ENDPOINT_STATE);        
-        return parser.parseStateStats2(resp.data);
+        return parser.parseStateStatsAsArray(resp.data);
     }
     catch(e){
         return ERROR_RESULT;

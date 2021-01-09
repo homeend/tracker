@@ -22,8 +22,8 @@
                     <select bind:value={sortBy}>
                         <option value="name">By State Name</option>
                         <option value="cases">Cases</option>
-                        <option value="deaths">Deaths</option>
-                        <option value="testet">Tested</option>
+                        <option value="death">Deaths</option>
+                        <option value="tested">Tested</option>
                     </select>
                 </div>
             </div>

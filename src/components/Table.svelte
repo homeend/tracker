@@ -1,12 +1,5 @@
 <script>
-    import {abbreviation2name} from '../data/stateNames.js';
     export let states;
-    const states_array = [];
-    
-	for (var key in states){
-        states_array.push(states[key]);
-	}
-
 </script>
 
 <style>
@@ -16,10 +9,7 @@
     .section {
         padding: 0.5rem 1.5rem;
     }
-
 </style>
-
-
 
 <div class="section">
     <div class="container">
@@ -33,9 +23,9 @@
                 </tr>
             </thead>
             <tbody>
-            {#each states_array as state (state.state)}
+            {#each states as state (state.state)}
             <tr>
-                <td><a href="{state.state}">{abbreviation2name[state.state]}</a></td>
+                <td><a href="{state.state}">{state.stateFullname}</a></td>
                 <td>{state.cases}</td>
                 <td>{state.death}</td>
                 <td>{state.tested}</td>

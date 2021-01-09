@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {abbreviation2name} from './stateNames.js';
 
 const ERR_TXT = 'temporarily unavailable';
 
@@ -14,11 +15,11 @@ export const ERROR_RESULT = {
 }
 
 function parseStateStats(data, stateShortName){
-    const all_states_data = parseStateStats2(data);
+    const all_states_data = parseStateStatsAsMap(data);
     return all_states_data[stateShortName];
 }
 
-function parseStateStats2(data){
+function parseStateStatsAsMap(data){
     return data
         .map(state => readStateData(state))
         .reduce((map, state_data) => {
@@ -27,8 +28,14 @@ function parseStateStats2(data){
         }, []);
 }
 
-function readStateData(state_data){
+function parseStateStatsAsArray(data){
+    return data
+        .map(state => readStateData(state));
+}
+
+function readStateData(state_data){    
     const tmp = {
+        stateFullname: abbreviation2name[state_data.state],
         state: state_data.state,
         cases: state_data.positive,
         death: state_data.death,
@@ -185,4 +192,4 @@ function formatNumber(number){
 //     }
 // ]
 
-export default { parseUsStats, parseStateStats, parseHistoricStats, parseStateStats2 }
+export default { parseUsStats, parseStateStats, parseHistoricStats, parseStateStatsAsMap, parseStateStatsAsArray }
