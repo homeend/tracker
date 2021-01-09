@@ -1,6 +1,6 @@
 <script context="module">
     import stateNames from '../data/stateNames.js';
-    import {stateStats} from '../data/request.js';
+    import {stateStats, historicStateStats} from '../data/request.js';
 
     export async function preload(page){
         const stateName = page.params['state']
@@ -17,7 +17,8 @@
             return {
                 stateShort: stateName,
                 stateFullName: stateData.name,
-                stats: await stateStats(stateName)
+                stats: await stateStats(stateName),
+                historic: await historicStateStats(stateName)
             }
         }
     }
@@ -30,6 +31,8 @@
     export let stateShort;
     export let stateFullName;
     export let stats;
+    export let historic;
+    const title = `${stateFullName} Covid Statistic US`;
 </script>
 
 <svelte:head>
@@ -37,4 +40,6 @@
 </svelte:head>
 
 <CovidStat {stats}/>
+<CovidChart historicData={historic} title={title} />
+
 <CovidChart />

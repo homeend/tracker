@@ -88,5 +88,3 @@
     <canvas bind:this={chartElement}></canvas>
 </div>
 {/if}
-
-chart
