@@ -14,8 +14,22 @@ export const ERROR_RESULT = {
 }
 
 function parseStateStats(data, stateShortName){
-    const state_data = data.find(state => state.state === stateShortName);
+    const all_states_data = parseStateStats2(data);
+    return all_states_data[stateShortName];
+}
+
+function parseStateStats2(data){
+    return data
+        .map(state => readStateData(state))
+        .reduce((map, state_data) => {
+            map[state_data.state] = state_data;
+            return map;
+        }, {});
+}
+
+function readStateData(state_data){
     const tmp = {
+        state: state_data.state,
         cases: state_data.positive,
         death: state_data.death,
         recovered: state_data.recovered,
