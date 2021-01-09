@@ -9,7 +9,7 @@
     let chartElement;
     let chart;
 
-    console.log('historicData', historicData);
+    // console.log('historicData', historicData);
 
     onMount(() => {
         if(historicData && document.body.clientWidth > 680){

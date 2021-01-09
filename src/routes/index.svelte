@@ -1,11 +1,12 @@
 <script context="module">
     import usStats from '../data/request.js';
-    import {historicStats} from '../data/request.js';
+    import {allStateStats, historicStats} from '../data/request.js';
     import common_data from '../common/data.js';
     export async function preload(){
         const usHistoricData = await historicStats()
 		const usStatsData = await usStats();
-		return {stats: usStatsData, historic: usHistoricData};
+        const allStateStatsData = await allStateStats();
+		return {stats: usStatsData, historic: usHistoricData, states: allStateStatsData};
     }
 </script>
 
@@ -15,6 +16,7 @@
     import TableContainer from '../components/TableContainer.svelte';
 	export let stats;
     export let historic;
+	export let states;
 </script>
 
 <svelte:head>
@@ -23,4 +25,4 @@
 
 <CovidStat {stats}/>
 <CovidChart historicData={historic} title="US Covid Statistic" />
-<TableContainer />
+<TableContainer {states}/>

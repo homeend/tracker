@@ -1,4 +1,4 @@
-export default [
+const stateNames = [
     {
       name: 'Alabama',
       abbreviation: 'AL',
@@ -236,3 +236,10 @@ export default [
       abbreviation: 'WY',
     },
   ];
+
+export default stateNames;
+export const abbreviation2name = stateNames
+  .reduce((map, state_data) => {
+      map[state_data.abbreviation] = state_data.name;
+      return map;
+  }, []);

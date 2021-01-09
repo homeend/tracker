@@ -24,7 +24,7 @@ function parseStateStats2(data){
         .reduce((map, state_data) => {
             map[state_data.state] = state_data;
             return map;
-        }, {});
+        }, []);
 }
 
 function readStateData(state_data){
@@ -185,4 +185,4 @@ function formatNumber(number){
 //     }
 // ]
 
-export default { parseUsStats, parseStateStats, parseHistoricStats }
+export default { parseUsStats, parseStateStats, parseHistoricStats, parseStateStats2 }

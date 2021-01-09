@@ -46,6 +46,16 @@ export async function stateStats(stateShortName){
     }
 }
 
+export async function allStateStats(){
+    try{
+        const resp = await axios.get(DATA_ENDPOINT_STATE);        
+        return parser.parseStateStats2(resp.data);
+    }
+    catch(e){
+        return ERROR_RESULT;
+    }
+}
+
 export async function historicStats(){
     try{
         const resp = await axios.get(DATA_ENDPOINT_DAILY);        

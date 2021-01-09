@@ -1,8 +1,9 @@
 <script>
     import TableFilter from './TableFilter.svelte';
     import Table from './Table.svelte';
+    export let states;
+    $: statesData = states;
 </script>
 
-<Table />
 <TableFilter />
-<h1>table container</h1>
+<Table states={statesData} />
