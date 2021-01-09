@@ -32,7 +32,7 @@ function parseChart(data, key, label, color){
     const chartData = data.map( data_point => {
         return {
             x: moment(data_point.date, "YYYYMMDD"),
-            y: data_point[key]
+            y: data_point[key] || 0
         }
     });
 
@@ -76,7 +76,7 @@ function parseHistoricStats(data){
     //     {
     //     date: 20210106,
 
-    return [
+    const statistics = [
         {
             label: 'Cases',
             key: 'positive',
@@ -102,25 +102,11 @@ function parseHistoricStats(data){
             key: 'death',
             color: 'rgb(255, 99, 132)',
         },
-    ].reduce((prev, next) => {
-        if(data.filter(d => d[next.key] !== null).length > 4){
-            prev.push(parseChart(data, next.key, next.label, next.color));
-        }
-        return prev;
-    }, []);
+    ];
 
-    const state_data = data.find(state => state.state === stateShortName);
-    const tmp = {
-        cases: state_data.positive,
-        death: state_data.death,
-        recovered: state_data.recovered,
-        ventilator: state_data.onVentilatorCurrently,
-        hospitalized: state_data.hospitalized,
-        icu: state_data.inIcuCurrently,
-        tested: state_data.totalTestResults,
-        updated: moment(state_data.dateModified).format('LLLL'),
-    }
-    return preProcessData(tmp);      
+    return statistics
+        .filter(stat => data.filter(d => d[stat.key] !== null).length > 4)
+        .map(stat => parseChart(data, stat.key, stat.label, stat.color));
 }
 
 function parseUsStats(data){
@@ -185,4 +171,4 @@ function formatNumber(number){
 //     }
 // ]
 
-export default { parseUsStats, parseStateStats }
+export default { parseUsStats, parseStateStats, parseHistoricStats }
