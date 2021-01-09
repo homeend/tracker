@@ -28,6 +28,87 @@ function parseStateStats(data, stateShortName){
     return preProcessData(tmp);      
 }
 
+function parseChart(data, key, label, color){
+    const chartData = data.map( data_point => {
+        return {
+            x: moment(data_point.date, "YYYYMMDD"),
+            y: data_point[key] || 0
+        }
+    });
+
+    return {
+        label,
+        data: chartData,
+        fill: false,
+        borderColor: color  
+    }
+}
+
+function parseHistoricStats(data){
+    // [
+    //     {
+    //     date: 20210107,
+    //     states: 56,
+    //     positive: 21340773,
+    //     negative: 201442513,
+    //     pending: 11612,
+    //     hospitalizedCurrently: 132370,
+    //     hospitalizedCumulative: 716151,
+    //     inIcuCurrently: 23821,
+    //     inIcuCumulative: 38236,
+    //     onVentilatorCurrently: 7900,
+    //     onVentilatorCumulative: 3748,
+    //     dateChecked: "2021-01-07T24:00:00Z",
+    //     death: 356229,
+    //     hospitalized: 716151,
+    //     totalTestResults: 262041062,
+    //     lastModified: "2021-01-07T24:00:00Z",
+    //     recovered: null,
+    //     total: 0,
+    //     posNeg: 0,
+    //     deathIncrease: 4033,
+    //     hospitalizedIncrease: 5318,
+    //     negativeIncrease: 1217934,
+    //     positiveIncrease: 266197,
+    //     totalTestResultsIncrease: 1914839,
+    //     hash: "28a62b13edef450b38fce15b12aab87c7cf98f19"
+    //     },
+    //     {
+    //     date: 20210106,
+
+    const statistics = [
+        {
+            label: 'Cases',
+            key: 'positive',
+            color: 'rgb(100, 0, 200)',
+        },
+        {
+            label: 'Recovered',
+            key: 'recovered',
+            color: 'rgb(100, 100, 200)',
+        },
+        {
+            label: 'Total Tested',
+            key: 'totalTestResults',
+            color: 'rgb(10, 30, 100)',
+        },
+        {
+            label: 'Hospitalized',
+            key: 'hospitalizedCurrently',
+            color: 'rgb(20, 100, 230)',
+        },
+        {
+            label: 'Deaths',
+            key: 'death',
+            color: 'rgb(255, 99, 132)',
+        },
+    ];
+
+    return statistics
+        .filter(stat => data.filter(d => d[stat.key] !== null).length > 4)
+        .map(stat => parseChart(data, stat.key, stat.label, stat.color));
+}
+
 function parseUsStats(data){
     // first element of array
     const [stats] = data; 
@@ -90,4 +171,4 @@ function formatNumber(number){
 //     }
 // ]
 
-export default { parseUsStats, parseStateStats }
+export default { parseUsStats, parseStateStats, parseHistoricStats }

@@ -1,0 +1,1 @@
+http-server --cors="*" -p 6688 .\test\resources\

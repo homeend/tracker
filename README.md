@@ -2,6 +2,8 @@
 
 [covidtracking - us](https://api.covidtracking.com/v1/us/current.json)
 [covidtracking - us - states](https://api.covidtracking.com/v1/states/current.json)
+[covidtracking - us - daily](https://api.covidtracking.com/v1/us/daily.json)
+[covidtracking - us - states - daily](https://api.covidtracking.com/v1/states/ca/daily.json)
 
 # sapper-template
 
