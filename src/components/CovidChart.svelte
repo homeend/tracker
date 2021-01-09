@@ -9,17 +9,15 @@
     let chartElement;
     let chart;
 
-    console.log('historicData', historicData);
-
     onMount(() => {
         if(historicData && document.body.clientWidth > 680){
             createChart();
         }
         else{
             hideChart = true;
-            // console.log('hideChart');
         }
     });
+    
     onDestroy(() => {
         if(chart){
             chart.destroy();
@@ -27,7 +25,6 @@
     });
 
     function createChart(){
-        // console.log('createChart');
         chartElement = new Chart(chartElement.getContext('2d'), {
             type: 'line',
             data: {
