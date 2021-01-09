@@ -59,7 +59,8 @@ export async function historicStats(){
 
 export async function historicStateStats(stateShortName){
     try{
-        const resp = await axios.get(DATA_ENDPOINT_DAILY_STATE.formatUnicorn(stateShortName.toLowerCase()));        
+        const url = DATA_ENDPOINT_DAILY_STATE.formatUnicorn(stateShortName.toLowerCase());
+        const resp = await axios.get(url);        
         return parser.parseHistoricStats(resp.data);
     }
     catch(e){

@@ -22,5 +22,5 @@
 </svelte:head>
 
 <CovidStat {stats}/>
-<CovidChart historicData={historic} title="Covid Statistic US" />
+<CovidChart historicData={historic} title="US Covid Statistic" />
 <TableContainer />

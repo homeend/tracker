@@ -32,7 +32,7 @@
     export let stateFullName;
     export let stats;
     export let historic;
-    const title = `${stateFullName} Covid Statistic US`;
+    const title = `${stateFullName} Covid Statistic`;
 </script>
 
 <svelte:head>

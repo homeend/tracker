@@ -36,12 +36,12 @@
             options: {
                 responsive: true,
                 tooltips: {
-                    callback: {
+                    callbacks: {
                         label: function(tooltipItem, data){
-                            let lable = data.datasets[tooltipItem.datasetIndex];
-                            lable += ": ";
-                            lable += tooltipItem.yLabel.toLocalString();
-                            return lable;
+                            let label = data.datasets[tooltipItem.datasetIndex].label;
+                            label += ": ";
+                            label += tooltipItem.yLabel.toLocaleString();
+                            return label;
                         }
                     }
                 },
