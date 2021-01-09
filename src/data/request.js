@@ -5,8 +5,8 @@ import {ERROR_RESULT} from './parser.js';
 
 const DATA_ENDPOINT = 'https://api.covidtracking.com/v1/us/current.json';
 const DATA_ENDPOINT_STATE = 'https://api.covidtracking.com/v1/states/current.json';
-// const DATA_ENDPOINT_DAILY = 'https://api.covidtracking.com/v1/us/daily.json';
-const DATA_ENDPOINT_DAILY = 'http://localhost:6688/daily.json';
+const DATA_ENDPOINT_DAILY = 'https://api.covidtracking.com/v1/us/daily.json';
+// const DATA_ENDPOINT_DAILY = 'http://localhost:6688/daily.json';
 
 export default async function usStats(){
     try{
